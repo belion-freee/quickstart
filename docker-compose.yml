@@ -11,7 +11,7 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/app
-      - bundle:/bundle
+      - bundle:/usr/local/bundle
     environment:
       HOME: /app
     ports:
@@ -26,7 +26,7 @@ services:
       HOME: /app
     volumes:
       - .:/app
-      - bundle:/bundle
+      - bundle:/usr/local/bundle
     ports:
       - "3035:3035"
     links:
