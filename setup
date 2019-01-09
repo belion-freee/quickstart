@@ -26,7 +26,6 @@ $dc run $rm web bundle exec rails new . -f -M -C -S -T --skip-spring --skip-turb
 
 echoing "Update config/database.yml"
 mv database.default.yml config/database.yml
-rm database.default.yml
 
 echoing "Exec db create"
 $dc run $rm web bundle exec rails db:create
