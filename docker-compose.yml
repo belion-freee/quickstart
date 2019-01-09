@@ -21,7 +21,7 @@ services:
       - db
   webpack:
     build: .
-    command: bundle exec webpack-dev-server
+    command: ./bin/webpack-dev-server
     environment:
       HOME: /app
     volumes:
