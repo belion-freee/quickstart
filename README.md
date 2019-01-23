@@ -20,14 +20,9 @@ cd quickstart
 Only you need to execute setup shell.
 
 ```
-./setup
+./qs setup
 ```
 
 ## Hello World!!
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
-
-Please remove setup　shell because it is unnecessary anymore.
-```
-rm ./setup
-```
