@@ -19,9 +19,10 @@ services:
     tty: true
     links:
       - db
+      - webpack
   webpack:
     build: .
-    command: ./bin/webpack-dev-server
+    command: bash -c "rm -rf ./public/entry; ./bin/webpack-dev-server"
     environment:
       HOME: /app
     volumes:

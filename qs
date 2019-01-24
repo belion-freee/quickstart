@@ -50,15 +50,16 @@ create_project() {
 
 init_services() {
     echoing "Building containers"
-    compose_up --build
+    $dc build --no-cache
 
     bundle_cmd install
-    rake_reset_db
-    npm_install
-    yarn_cmd
-    rake_cmd "frontend:import"
+    run_yarn install
+    rails_cmd db:migrate:reset
+    rails_cmd db:seed
 
-    compose_ps
+    rm_pids
+
+    $dc up
 }
 
 compose_up() {
