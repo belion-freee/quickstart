@@ -41,7 +41,20 @@ create_project() {
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -M -C -S -T --skip-spring --skip-turbolinks --skip-coffee --webpack -d=postgresql
+
+  # set options
+  test_option=" -T"
+  front_option=" --skip-coffee --webpack"
+  for arg in $@
+    do
+      case $arg in
+        "test") test_option="" ;;
+        "assets") front_option="" ;;
+        *) ;;
+      esac
+    done
+
+  bundle_exec rails new . -f -M -C -S --skip-spring --skip-turbolinks -d=postgresql$front_option$test_option
 
   echoing "Update config/database.yml"
   mv database.default.yml config/database.yml
