@@ -14,17 +14,21 @@ services:
       - bundle:/usr/local/bundle
     environment:
       HOME: /app
+      RAILS_ENV: development
     ports:
       - "3000:3000"
     tty: true
     links:
       - db
-      - webpack
   webpack:
     build: .
     command: bash -c "rm -rf ./public/entry; ./bin/webpack-dev-server"
     environment:
       HOME: /app
+      NODE_ENV: development
+      RAILS_ENV: development
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+      WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3035
     volumes:
       - .:/app
       - bundle:/usr/local/bundle

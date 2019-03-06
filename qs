@@ -17,6 +17,13 @@ db="db" # describe database service name from docker-compose.yml
 
 front="webpack" # describe webpacker service name from docker-compose.yml
 
+app_name=`pwd | awk -F "/" '{ print $NF }'` # get project dir name
+
+# define container name
+app_container="${app_name}_${app}_1"
+db_container="${app_name}_${db}_1"
+front_container="${app_name}_${front}_1"
+
 echoing() {
     echo "========================================================"
     echo "$1"
@@ -192,9 +199,8 @@ db_console() {
     database="development"
     username="postgres"
     port="5432"
-    container="quickstart_db_1"
 
-    run_db psql -h $container -p $port -U $username $database
+    run_db psql -h $db_container -p $port -U $username $database
 }
 
 db_dump() {
@@ -202,14 +208,13 @@ db_dump() {
     database="development"
     username="postgres"
     port="5432"
-    container="quickstart_db_1"
 
     tm=$(date +\%Y\%m\%d-\%H\%M)
     dump_file=tmp/dbdump-${dbname}-${tm}.dump
 
     echoing "Dump database $dbname data to $dump_file"
 
-    run_db pg_dump -h $container -p $port -U $username --disable-triggers $database > $dump_file
+    run_db pg_dump -h $db_container -p $port -U $username --disable-triggers $database > $dump_file
     echo "done"
 }
 
