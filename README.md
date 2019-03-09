@@ -10,10 +10,11 @@ If you are a Linux user you need to install docker-compose with [this operations
 
 ## Clone this repository
 Then clone the repository and move to project folder.
+Plese set your project name like `sample_app`.
 
 ```
-git clone git@github.com:belion-freee/quickstart.git
-cd quickstart
+git clone git@github.com:belion-freee/quickstart.git <Project name>
+cd <Project name>
 ```
 
 ## Execute Setup
