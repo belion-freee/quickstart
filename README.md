@@ -23,6 +23,16 @@ Only you need to execute setup shell.
 ./qs setup
 ```
 
+### Options
+There are options to create new rails project.
+
+- `test=true` : Setup with this option if you need Minitest.
+- `webpack=false` : Setup with this option if you don't need Webpacker.
+
+```
+./qs setup test=true webpack=false
+```
+
 ## Hello World!!
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
