@@ -44,17 +44,17 @@ create_project() {
 
   # set options
   test_option=" -T"
-  front_option=" --skip-coffee --webpack"
+  front_option=" --webpack"
   for arg in $@
     do
       case $arg in
-        "test") test_option="" ;;
-        "assets") front_option="" ;;
+        "test=true") test_option="" ;;
+        "webpack=false") front_option="" ;;
         *) ;;
       esac
     done
 
-  bundle_exec rails new . -f -M -C -S --skip-spring --skip-turbolinks -d=postgresql$front_option$test_option
+  bundle_exec rails new . -f -d=postgresql$front_option$test_option
 
   echoing "Update config/database.yml"
   mv database.default.yml config/database.yml
