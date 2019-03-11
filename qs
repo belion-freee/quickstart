@@ -63,6 +63,12 @@ create_project() {
   bundle_exec rails db:create
 
   echoing "docker-compose up"
+  if [ "" == "$front_option" ]; then
+      mv docker-compose.remove_front.yml docker-compose.yml
+  else
+      rm docker-compose.remove_front.yml
+  fi
+
   $dc up -d
 
   echo "You can access to localhost:3000"
@@ -247,7 +253,7 @@ cmd=$1
 shift
 case "$cmd" in
     setup)
-        create_project && exit 0
+        create_project $* && exit 0
         ;;
     init)
         init_services && exit 0
