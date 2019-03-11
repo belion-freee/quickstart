@@ -38,10 +38,6 @@ rm_pids() {
 
 create_project() {
   echoing "Exec Bundle Install for executing rails new command"
-  bundle_cmd install
-
-  echoing "Exec rails new with postgresql and webpack"
-
   # set options
   test_option=" -T"
   front_option=" --webpack"
@@ -54,6 +50,17 @@ create_project() {
       esac
     done
 
+  echo "front option setting by$front_option"
+  echo "test option setting by$test_option"
+
+  if [ "" == "$front_option" ]; then
+      sed -i '' -e '23,38d' docker-compose.yml
+  fi
+
+  echoing "Exec Bundle Install for executing rails new command"
+  bundle_cmd install
+
+  echoing "Exec rails new with postgresql and webpack"
   bundle_exec rails new . -f -d=postgresql$front_option$test_option
 
   echoing "Update config/database.yml"
@@ -63,12 +70,6 @@ create_project() {
   bundle_exec rails db:create
 
   echoing "docker-compose up"
-  if [ "" == "$front_option" ]; then
-      mv docker-compose.remove_front.yml docker-compose.yml
-  else
-      rm docker-compose.remove_front.yml
-  fi
-
   $dc up -d
 
   echo "You can access to localhost:3000"
