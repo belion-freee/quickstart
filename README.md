@@ -15,7 +15,7 @@ Then clone the repository and move to project folder.
 Plese set your project name like `sample_app`.
 
 ```
-git clone git@github.com:belion-freee/quickstart.git <Project name>
+git clone https://github.com/belion-freee/quickstart.git <Project name>
 cd <Project name>
 ```
 
