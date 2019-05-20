@@ -1,6 +1,6 @@
 # quickstart
 You can easily create Rails templates using docker-compose.
-It uses PostGresql for the database and webpacker on the front end, so modern development using ES 6 is possible.
+It uses PostgreSQL or MySQL for the database and webpacker on the front end, so modern development using ES 6 is possible.
 
 詳細な手順は[Qiita](https://qiita.com/belion_freee/items/f0ef60a08299c9febbdf)にも載せてあります。
 
@@ -31,9 +31,10 @@ There are options to create new rails project.
 
 - `test=true` : Setup with this option if you need Minitest.
 - `webpack=false` : Setup with this option if you don't need Webpacker.
+- `db=mysql` : Setup with this option if you need to setup db with MySQL.
 
 ```
-./qs setup test=true webpack=false
+./qs setup test=true webpack=false db=mysql
 ```
 
 ## Hello World!!
