@@ -41,27 +41,40 @@ create_project() {
   # set options
   test_option=" -T"
   front_option=" --webpack"
+  db_option="postgresql"
   for arg in $@
     do
       case $arg in
         "test=true") test_option="" ;;
         "webpack=false") front_option="" ;;
+        "db=mysql") db_option="mysql" ;;
         *) ;;
       esac
     done
 
   echo "front option setting by$front_option"
   echo "test option setting by$test_option"
+  echo "db option setting by $db_option"
+
+  row_num="23,38d"
+  if [ "mysql" == "$db_option" ]; then
+      mv -f database.mysql.yml database.default.yml
+      mv -f docker-compose.mysql.yml docker-compose.yml
+      row_num="25,40d"
+  else
+      rm docker-compose.mysql.yml
+      rm database.mysql.yml
+  fi
 
   if [ "" == "$front_option" ]; then
-      sed -i '' -e '23,38d' docker-compose.yml
+      sed -i '' -e $row_num docker-compose.yml
   fi
 
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -d=postgresql$front_option$test_option
+  bundle_exec rails new . -f -d=$db_option$front_option$test_option
 
   echoing "Update config/database.yml"
   mv database.default.yml config/database.yml
