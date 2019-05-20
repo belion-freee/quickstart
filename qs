@@ -190,6 +190,26 @@ rails_server() {
     $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
 }
 
+rails_db() {
+    case "$1" in
+      set)
+        rails_cmd db:migrate
+        ;;
+      up)
+        rails_cmd db:migrate:up VERSION="$2"
+        ;;
+      down)
+        rails_cmd db:migrate:down VERSION="$2"
+        ;;
+      reset)
+        rails_cmd db:reset
+        ;;
+      *)
+        rails_cmd db:migrate:status
+        ;;
+    esac
+}
+
 rails_cmd() {
     bundle_exec rails $*
 }
@@ -200,6 +220,10 @@ rake_cmd() {
 
 rspec_cmd() {
     bundle_exec rspec $*
+}
+
+test_cmd() {
+    bundle_exec test $*
 }
 
 bundle_cmd() {
@@ -308,6 +332,9 @@ case "$cmd" in
     rails)
         rails_cmd $*
         ;;
+    db)
+        rails_db $*
+        ;;
     cons)
         rails_console $*
         ;;
@@ -316,6 +343,9 @@ case "$cmd" in
         ;;
     rspec)
         rspec_cmd $*
+        ;;
+    test)
+        test_cmd $*
         ;;
     bundle)
         bundle_cmd $*
@@ -361,7 +391,11 @@ App:
   server   Run rails server
   rails    [args] Run rails command in application container
   rake     [args] Run rake command in application container
+  db       [args] Run rails db command you can use set(migrate), up, down, reset, other is status
+           ex: ./qs db set #running rails db:migrate
+               ./qs db up 2019010101 #running rails db:migrate:up VERSION=2019010101
   rspec    [args] Run rspec command in application container
+  test     [args] Run Minitest command in application container
   bundle   [args] Run bundle command in application container
   cons     Run rails console
   rubocop  [args] Run rubocop
