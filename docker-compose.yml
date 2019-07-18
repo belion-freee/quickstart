@@ -28,6 +28,7 @@ services:
     build: .
     command: bundle exec solargraph socket --host=0.0.0.0 --port=7658
     volumes:
+      - .:/app
       - bundle:/usr/local/bundle
     ports:
       - "8091:7658"
