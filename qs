@@ -62,10 +62,6 @@ create_project() {
       rm database.mysql.yml
   fi
 
-  if [ "" == "$front_option" ]; then
-      rm Procfile.dev
-  fi
-
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
 
