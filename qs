@@ -213,19 +213,19 @@ rails_db() {
 spring_db() {
     case "$1" in
       set)
-        spring_cmd rails db:migrate
+        spring_cmd rake db:migrate
         ;;
       up)
-        spring_cmd rails db:migrate:up VERSION="$2"
+        spring_cmd rake db:migrate:up VERSION="$2"
         ;;
       down)
-        spring_cmd rails db:migrate:down VERSION="$2"
+        spring_cmd rake db:migrate:down VERSION="$2"
         ;;
       reset)
-        spring_cmd rails db:reset
+        spring_cmd rake db:reset
         ;;
       *)
-        spring_cmd rails db:migrate:status
+        spring_cmd rake db:migrate:status
         ;;
     esac
 }
