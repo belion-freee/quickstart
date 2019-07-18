@@ -15,8 +15,6 @@ app="web" # describe $application service name from docker-compose.yml
 
 db="db" # describe database service name from docker-compose.yml
 
-front="webpack" # describe webpacker service name from docker-compose.yml
-
 app_name=`pwd | awk -F "/" '{ print $NF }'` # get project dir name
 
 # define container name
@@ -56,18 +54,12 @@ create_project() {
   echo "test option setting by$test_option"
   echo "db option setting by $db_option"
 
-  row_num="23,38d"
   if [ "mysql" == "$db_option" ]; then
       mv -f database.mysql.yml database.default.yml
       mv -f docker-compose.mysql.yml docker-compose.yml
-      row_num="25,40d"
   else
       rm docker-compose.mysql.yml
       rm database.mysql.yml
-  fi
-
-  if [ "" == "$front_option" ]; then
-      sed -i '' -e $row_num docker-compose.yml
   fi
 
   echoing "Exec Bundle Install for executing rails new command"
@@ -83,7 +75,7 @@ create_project() {
   bundle_exec rails db:create
 
   echoing "docker-compose up"
-  $dc up -d
+  compose_up $app
 
   echo "You can access to localhost:3000"
 }
@@ -174,8 +166,12 @@ run_db() {
     invoke_run $db $*
 }
 
-run_front() {
-    invoke_run $front $*
+run_spring() {
+    $dc exec spring $*
+}
+
+run_solargraph() {
+    invoke_run solargraph $*
 }
 
 rails_server() {
@@ -206,6 +202,26 @@ rails_db() {
         ;;
       *)
         rails_cmd db:migrate:status
+        ;;
+    esac
+}
+
+spring_db() {
+    case "$1" in
+      set)
+        spring_cmd rake db:migrate
+        ;;
+      up)
+        spring_cmd rake db:migrate:up VERSION="$2"
+        ;;
+      down)
+        spring_cmd rake db:migrate:down VERSION="$2"
+        ;;
+      reset)
+        spring_cmd rake db:reset
+        ;;
+      *)
+        spring_cmd rake db:migrate:status
         ;;
     esac
 }
@@ -242,6 +258,14 @@ rails_console() {
     bundle_exec rails c $*
 }
 
+spring_cmd() {
+    run_spring spring $*
+}
+
+solargraph_cmd() {
+    run_solargraph solargraph $*
+}
+
 rake_reset_db() {
     echoing "Running reset db"
     compose_stop $app
@@ -276,15 +300,15 @@ db_dump() {
 }
 
 run_yarn() {
-    run_front bin/yarn $*
+    run_app bin/yarn $*
 }
 
 run_npm() {
-  run_front npm $*
+  run_app npm $*
 }
 
 run_webpack() {
-  run_front webpack $*
+  run_app webpack $*
 }
 
 cmd=$1
@@ -371,6 +395,15 @@ case "$cmd" in
     webpack)
         run_webpack $*
         ;;
+    spring)
+        spring_cmd $*
+        ;;
+    sdb)
+        spring_db $*
+        ;;
+    solargraph)
+        solargraph_cmd $*
+        ;;
     *)
         read -d '' help <<-EOF
 Usage: $0 command
@@ -399,11 +432,18 @@ App:
   bundle   [args] Run bundle command in application container
   cons     Run rails console
   rubocop  [args] Run rubocop
+  yarn      Run yarn command in application container
+  npm       Run npm  command in application container
+  webpack   Run webpack  command in application container
 
-Frontend
-  yarn      Run yarn command in Frontend container
-  npm       Run npm  command in Frontend container
-  webpack   Run webpack  command in Frontend container
+Spring
+  spring    Run spring command in Spring container
+  sdb       [args] Run rails db command you can use set(migrate), up, down, reset, other is status
+             ex: ./qs db set #running rails db:migrate
+                 ./qs db up 2019010101 #running rails db:migrate:up VERSION=2019010101
+
+Solargraph
+  solargraph Run solargraph command in Spring container
 
 DB:
   reset-db  reset database in DB container
