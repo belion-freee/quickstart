@@ -40,3 +40,17 @@ There are options to create new rails project.
 ## Hello World!!
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
+
+## Other container
+You can use also `spring container` and `solargraph container`!
+
+### Spring container
+Execute `./qs up spring` command.
+And you can execute some command like `./qs spring rails c`, `./qs spring rails db:migrate`.
+
+### Solargraph container
+If you use solargraph container at first time, Please Add `gem 'solargraph', group: :development` to Gemfile, And execute `./qs bundle install` command.
+
+Execute `./qs up solargraph` command.
+
+Now, You can use solargraph server.
