@@ -82,16 +82,21 @@ create_project() {
 
 init_services() {
     echoing "Building containers"
-    $dc build --no-cache
+    $dc down -v
+    $dc build --no-cache $app
 
     bundle_cmd install
-    run_yarn install
+
+    if [ "--webpack" == "$1" ]; then
+      run_yarn install
+    fi
+
     rails_cmd db:migrate:reset
     rails_cmd db:seed
 
     rm_pids
 
-    $dc up
+    $dc up $app
 }
 
 compose_up() {
@@ -318,7 +323,7 @@ case "$cmd" in
         create_project $* && exit 0
         ;;
     init)
-        init_services && exit 0
+        init_services $* && exit 0
         ;;
     ps)
         compose_ps && exit 0
