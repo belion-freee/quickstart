@@ -231,6 +231,10 @@ spring_db() {
     esac
 }
 
+spring_dive() {
+  $dc exec spring bash
+}
+
 rails_cmd() {
     bundle_exec rails $*
 }
@@ -406,6 +410,9 @@ case "$cmd" in
     sdb)
         spring_db $*
         ;;
+    sdive)
+        spring_dive $*
+        ;;
     solargraph)
         solargraph_cmd $*
         ;;
@@ -442,7 +449,8 @@ App:
   webpack   Run webpack  command in application container
 
 Spring
-  spring    Run spring command in Spring container
+  spring    Exec spring command in Spring container
+  sdive     Into spring container
   sdb       [args] Run rails db command you can use set(migrate), up, down, reset, other is status
              ex: ./qs db set #running rails db:migrate
                  ./qs db up 2019010101 #running rails db:migrate:up VERSION=2019010101
