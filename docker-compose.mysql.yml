@@ -7,13 +7,16 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - data:/var/lib/mysql
+      - data:/var/lib/mysql:cached
   web: &app
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
+      - .:/app:cached
+      - bundle:/usr/local/bundle:cached
+      - /app/tmp
+      - /app/log
+      - /app/.git
     environment:
       HOME: /app
       RAILS_ENV: development
