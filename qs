@@ -38,13 +38,13 @@ create_project() {
   echoing "Exec Bundle Install for executing rails new command"
   # set options
   test_option=" -T"
-  front_option=" --webpack"
+  front_option=""
   db_option="postgresql"
   for arg in $@
     do
       case $arg in
         "test=true") test_option="" ;;
-        "webpack=false") front_option="" ;;
+        "webpack=true") front_option=" --webpack" ;;
         "db=mysql") db_option="mysql" ;;
         *) ;;
       esac
