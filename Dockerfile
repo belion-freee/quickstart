@@ -11,7 +11,11 @@ ENV XDG_CACHE_HOME /tmp
 EXPOSE 3000
 
 # install package to docker container
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+RUN apt-get update -qq && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    vim \
+    less
 
 # install yarn
 RUN apt-get install apt-transport-https
