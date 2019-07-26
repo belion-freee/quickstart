@@ -8,6 +8,13 @@ services:
       - "3306:3306"
     volumes:
       - data:/var/lib/mysql:cached
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+       - redis-data:/data:cached
   web: &app
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -30,16 +37,16 @@ services:
     command: bundle exec spring server
     ports: []
   solargraph:
-    build: .
+    <<: *app
     command: bundle exec solargraph socket --host=0.0.0.0 --port=7658
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
     ports:
       - "8091:7658"
+    links: []
 
 volumes:
   bundle:
     driver: local
   data:
     driver: local
+  redis-data:
+      driver: local
