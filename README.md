@@ -30,11 +30,11 @@ Only you need to execute setup shell.
 There are options to create new rails project.
 
 - `test=true` : Setup with this option if you need Minitest.
-- `webpack=false` : Setup with this option if you don't need Webpacker.
+- `webpack=true` : Setup with this option if you need Webpacker.
 - `db=mysql` : Setup with this option if you need to setup db with MySQL.
 
 ```
-./qs setup test=true webpack=false db=mysql
+./qs setup test=true webpack=true db=mysql
 ```
 
 ## Hello World!!
@@ -54,3 +54,7 @@ If you use solargraph container at first time, Please Add `gem 'solargraph', gro
 Execute `./qs up solargraph` command.
 
 Now, You can use solargraph server.
+
+### Redis container
+Execute `./qs up redis` command.
+
