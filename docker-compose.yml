@@ -13,6 +13,10 @@ services:
     command: redis-server --appendonly yes
     volumes:
        - redis-data:/data:cached
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
   web: &app
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
