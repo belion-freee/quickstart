@@ -54,13 +54,16 @@ create_project() {
   echo "test option setting by$test_option"
   echo "db option setting by $db_option"
 
+  d_row_num="12,19d"
+  dc_row_num="9,15d"
   if [ "mysql" == "$db_option" ]; then
-      mv -f database.mysql.yml database.default.yml
-      mv -f docker-compose.mysql.yml docker-compose.yml
-  else
-      rm docker-compose.mysql.yml
-      rm database.mysql.yml
+    d_row_num="2,11d"
+    dc_row_num="4,8d"
   fi
+
+  # edit yml files
+  sed -i '' -e $d_row_num database.yml
+  sed -i '' -e $dc_row_num docker-compose.yml
 
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
