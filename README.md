@@ -19,6 +19,8 @@ git clone https://github.com/belion-freee/quickstart.git <Project name>
 cd <Project name>
 ```
 
+It may be easier to fork. In that case, please change the repository name from Settings -> Rename after fork.
+
 ## Execute Setup
 Only you need to execute setup shell.
 
