@@ -20,7 +20,6 @@ app_name=`pwd | awk -F "/" '{ print $NF }'` # get project dir name
 # define container name
 app_container="${app_name}_${app}_1"
 db_container="${app_name}_${db}_1"
-front_container="${app_name}_${front}_1"
 
 echoing() {
     echo "========================================================"
@@ -72,7 +71,7 @@ create_project() {
   bundle_exec rails new . -f -d=$db_option$front_option$test_option
 
   echoing "Update config/database.yml"
-  mv database.default.yml config/database.yml
+  mv database.yml config/database.yml
 
   echoing "Exec db create"
   bundle_exec rails db:create
