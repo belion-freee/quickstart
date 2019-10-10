@@ -36,4 +36,3 @@ ENV HOME /app
 
 # executing bundle install
 COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock

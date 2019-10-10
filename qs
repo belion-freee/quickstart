@@ -70,11 +70,19 @@ create_project() {
   echoing "Exec rails new with postgresql and webpack"
   bundle_exec rails new . -f -d=$db_option$front_option$test_option
 
+  echoing "Exec Bundle Update for alerts"
+  bundle_cmd update
+
   echoing "Update config/database.yml"
   mv database.yml config/database.yml
 
   echoing "Exec db create"
   bundle_exec rails db:create
+
+  if [ " --webpack" == "$front_option" ]; then
+    echoing "Exec webpacker:install"
+	bundle_exec rails webpacker:install
+  fi
 
   echoing "docker-compose up"
   compose_up $app
