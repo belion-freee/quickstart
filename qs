@@ -79,6 +79,11 @@ create_project() {
   echoing "Exec db create"
   bundle_exec rails db:create
 
+  if [ " --webpack" == "$front_option" ]; then
+    echoing "Exec webpacker:install"
+	bundle_exec rails webpacker:install
+  fi
+
   echoing "docker-compose up"
   compose_up $app
 
