@@ -70,6 +70,9 @@ create_project() {
   echoing "Exec rails new with postgresql and webpack"
   bundle_exec rails new . -f -d=$db_option$front_option$test_option
 
+  echoing "Exec Bundle Update for alerts"
+  bundle_cmd update
+
   echoing "Update config/database.yml"
   mv database.yml config/database.yml
 
