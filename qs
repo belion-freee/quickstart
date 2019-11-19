@@ -42,9 +42,12 @@ create_project() {
   for arg in $@
     do
       case $arg in
-        "test=true") test_option="" ;;
-        "webpack=true") front_option=" --webpack" ;;
-        "db=mysql") db_option="mysql" ;;
+        "minitest") test_option="" ;;
+        "webpack") front_option=" --webpack" ;;
+        "react") front_option=" --webpack=react" ;;
+        "vue") front_option=" --webpack=vue" ;;
+        "angular") front_option=" --webpack=angular" ;;
+        "mysql") db_option="mysql" ;;
         *) ;;
       esac
     done
@@ -59,6 +62,9 @@ create_project() {
     d_row_num="2,11d"
     dc_row_num="4,8d"
   fi
+
+  echo "d_row_num setting by $d_row_num"
+  echo "dc_row_num setting by $dc_row_num"
 
   # edit yml files
   sed -i '' -e $d_row_num database.yml
