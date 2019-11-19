@@ -31,12 +31,15 @@ Only you need to execute setup shell.
 ### Options
 There are options to create new rails project.
 
-- `test=true` : Setup with this option if you need Minitest.
-- `webpack=true` : Setup with this option if you need Webpacker.
-- `db=mysql` : Setup with this option if you need to setup db with MySQL.
+- `minitest` : Setup with this option if you need Minitest.
+- `webpack` : Setup with this option if you need Webpacker.
+- `react` : Setup with this option if you need React.
+- `vue` : Setup with this option if you need Vue.
+- `angular` : Setup with this option if you need Angular.
+- `mysql` : Setup with this option if you need to setup db with MySQL.
 
 ```
-./qs setup test=true webpack=true db=mysql
+./qs setup minitest webpack mysql
 ```
 
 ## Hello World!!
