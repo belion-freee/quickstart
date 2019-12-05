@@ -39,6 +39,7 @@ create_project() {
   test_option=" -T"
   front_option=""
   db_option="postgresql"
+  api_option=""
   for arg in $@
     do
       case $arg in
@@ -48,6 +49,7 @@ create_project() {
         "vue") front_option=" --webpack=vue" ;;
         "angular") front_option=" --webpack=angular" ;;
         "mysql") db_option="mysql" ;;
+        "api") api_option=" --api" ;;
         *) ;;
       esac
     done
@@ -55,6 +57,7 @@ create_project() {
   echo "front option setting by$front_option"
   echo "test option setting by$test_option"
   echo "db option setting by $db_option"
+  echo "api option setting by $api_option"
 
   d_row_num="12,19d"
   dc_row_num="9,15d"
@@ -74,7 +77,7 @@ create_project() {
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -d=$db_option$front_option$test_option
+  bundle_exec rails new . -f -d=$db_option$front_option$test_option$api_option
 
   echoing "Exec Bundle Update for alerts"
   bundle_cmd update
