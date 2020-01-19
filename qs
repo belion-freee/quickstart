@@ -59,20 +59,6 @@ create_project() {
   echo "db option setting by $db_option"
   echo "api option setting by $api_option"
 
-  d_row_num="12,19d"
-  dc_row_num="9,15d"
-  if [ "mysql" == "$db_option" ]; then
-    d_row_num="2,11d"
-    dc_row_num="4,8d"
-  fi
-
-  echo "d_row_num setting by $d_row_num"
-  echo "dc_row_num setting by $dc_row_num"
-
-  # edit yml files
-  sed -i '' -e $d_row_num database.yml
-  sed -i '' -e $dc_row_num docker-compose.yml
-
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
 

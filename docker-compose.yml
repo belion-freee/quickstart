@@ -6,13 +6,6 @@ services:
       - "5432:5432"
     volumes:
       - data:/var/lib/postgresql/data:cached
-    image: mysql:5.7
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-      - "3306:3306"
-    volumes:
-      - data:/var/lib/mysql:cached
   redis:
     image: redis
     ports:
@@ -30,8 +23,6 @@ services:
     volumes:
       - .:/app:cached
       - bundle:/usr/local/bundle:cached
-      - /app/tmp
-      - /app/log
       - /app/.git
     environment:
       HOME: /app
