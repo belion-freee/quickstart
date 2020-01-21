@@ -42,6 +42,18 @@ There are options to create new rails project.
 ./qs setup minitest webpack mysql
 ```
 
+### Windows
+May be not work `./qs setup`.Please execute command manually.
+
+```
+docker-compose run --rm web bundle install
+docker-compose run --rm web bundle exec rails new . -f -d=postgresql -T
+docker-compose run --rm web bundle update
+mv database.yml config/database.yml
+docker-compose run --rm web bundle exec rails db:create
+docker-compose up web
+```
+
 ## Hello World!!
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
