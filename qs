@@ -263,6 +263,7 @@ rake_cmd() {
 }
 
 rspec_cmd() {
+    $dc start chrome
     bundle_exec rspec $*
 }
 
