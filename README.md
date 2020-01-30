@@ -26,7 +26,7 @@ Please execute command manually.
 
 ```
 docker-compose run --rm web bundle install
-docker-compose run --rm web bundle exec rails new . -f -d=mysql -T
+docker-compose run --rm web bundle exec rails new . -f -d=mysql
 docker-compose run --rm web bundle update
 mv database.yml config/database.yml
 docker-compose run --rm web bundle exec rails db:create
