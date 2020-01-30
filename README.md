@@ -15,39 +15,18 @@ Then clone the repository and move to project folder.
 Plese set your project name like `sample_app`.
 
 ```
-git clone -b for_win_pg https://github.com/belion-freee/quickstart.git gamecritic
+git clone -b for_win_pg https://github.com/belion-freee/quickstart.git <Project name>
 cd <Project name>
 ```
 
 It may be easier to fork. In that case, please change the repository name from Settings -> Rename after fork.
 
 ## Execute Setup
-Only you need to execute setup shell.
-
-```
-./qs setup
-```
-
-### Options
-There are options to create new rails project.
-
-- `minitest` : Setup with this option if you need Minitest.
-- `webpack` : Setup with this option if you need Webpacker.
-- `react` : Setup with this option if you need React.
-- `vue` : Setup with this option if you need Vue.
-- `angular` : Setup with this option if you need Angular.
-- `mysql` : Setup with this option if you need to setup db with MySQL.
-
-```
-./qs setup minitest webpack mysql
-```
-
-### Windows
-May be not work `./qs setup`.Please execute command manually.
+Please execute command manually.
 
 ```
 docker-compose run --rm web bundle install
-docker-compose run --rm web bundle exec rails new . -f -d=postgresql -T
+docker-compose run --rm web bundle exec rails new . -f -d=postgresql
 docker-compose run --rm web bundle update
 mv database.yml config/database.yml
 docker-compose run --rm web bundle exec rails db:create
@@ -60,6 +39,7 @@ Enjoy your Rails!
 
 ## Other services
 You can use also those services!
+But the `./qs` command mey be not working. because windows.
 
 ### Spring service
 Execute `./qs up spring` command.
