@@ -1,14 +1,12 @@
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
-  min_messages: WARNING
   host: db
-  port: 5432
-  username: postgres
-  password: postgres
+  port: 3306
+  username: root
+  password:
   pool: 5
   timeout: 5000
-  stats_execution_limit: 10
 
 development:
   <<: *default

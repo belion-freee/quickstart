@@ -15,7 +15,7 @@ Then clone the repository and move to project folder.
 Plese set your project name like `sample_app`.
 
 ```
-git clone -b for_win_pg https://github.com/belion-freee/quickstart.git gamecritic
+git clone -b for_win_mysql https://github.com/belion-freee/quickstart.git gamecritic
 cd <Project name>
 ```
 
@@ -47,7 +47,7 @@ May be not work `./qs setup`.Please execute command manually.
 
 ```
 docker-compose run --rm web bundle install
-docker-compose run --rm web bundle exec rails new . -f -d=postgresql -T
+docker-compose run --rm web bundle exec rails new . -f -d=mysql -T
 docker-compose run --rm web bundle update
 mv database.yml config/database.yml
 docker-compose run --rm web bundle exec rails db:create
@@ -76,4 +76,4 @@ Now, You can use solargraph server.
 Execute `./qs up redis` command.
 
 ### Chrome service
-Execute `./qs up chrome` command. 
+Execute `./qs up chrome` command.
