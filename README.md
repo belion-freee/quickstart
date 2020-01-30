@@ -15,7 +15,7 @@ Then clone the repository and move to project folder.
 Plese set your project name like `sample_app`.
 
 ```
-git clone -b for_win_mysql https://github.com/belion-freee/quickstart.git gamecritic
+git clone -b for_win_mysql https://github.com/belion-freee/quickstart.git <Project name>
 cd <Project name>
 ```
 
