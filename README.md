@@ -46,6 +46,13 @@ There are options to create new rails project.
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
 
+## Do you use Windows?
+It has been reported that scripts do not work properly on Windows.
+If it does not work properly, please install it referring to the following branch.
+
+[With PostgreSQL](https://github.com/belion-freee/quickstart/tree/for_win_pg#clone-this-repository)
+[With MySQL](https://github.com/belion-freee/quickstart/tree/for_win_mysql#clone-this-repository)
+
 ## Other services
 You can use also those services!
 
