@@ -72,3 +72,10 @@ Execute `./qs up redis` command.
 
 ### Chrome service
 Execute `./qs up chrome` command. 
+
+## Development
+
+### debug
+you can use byebug.
+
+https://qiita.com/TYuko/items/d46f5dc91dd488574273
