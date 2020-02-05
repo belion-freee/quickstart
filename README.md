@@ -37,6 +37,22 @@ docker-compose up web
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
 
+### Didn't work
+Mounting may fail when using VirtualBox.
+Make the path specified for volumes a full path.
+
+And VirtualBox only available under `/c/Users/` dir.
+
+```
+web: &app
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - /c/Users/<path>:/app:cached # modify this line!
+      - bundle:/usr/local/bundle:cached
+      - /app/.git
+```
+
 ## Other services
 You can use also those services!
 But the `./qs` command mey be not working. because windows.
