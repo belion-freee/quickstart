@@ -60,7 +60,7 @@ create_project() {
   echo "api option setting by $api_option"
 
   d_row_num="12,19d"
-  dc_row_num="1,17d"
+  dc_row_num="11,17d"
   if [ "mysql" == "$db_option" ]; then
     d_row_num="2,11d"
     dc_row_num="4,10d"
