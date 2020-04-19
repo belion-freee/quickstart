@@ -34,34 +34,15 @@ rm_pids() {
 }
 
 create_project() {
-  webpack=""
-  for arg in $@
-    do
-      case $arg in
-        --webpack* ) webpack="true" ;;
-        *) ;;
-      esac
-    done
-
   echoing "Exec Bundle Install for executing rails new command"
+  compose_build $app
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
   bundle_exec rails new . -f -d=postgresql $*
 
-  echoing "Exec Bundle Update for alerts"
-  bundle_cmd update
-
   echoing "Update config/database.yml"
   mv database.yml config/database.yml
-
-  echoing "Exec db create"
-  bundle_exec rails db:create
-
-  if [ "true" == "$webpack" ]; then
-    echoing "Exec webpacker:install"
-    bundle_exec rails webpacker:install
-  fi
 
   echoing "docker-compose up"
   compose_up $app

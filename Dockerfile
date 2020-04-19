@@ -1,5 +1,5 @@
-# use ruby version 2.6.5
-FROM ruby:2.6.5
+# use ruby version 2.6
+FROM ruby:2.6
 
 # using japanese on rails console
 ENV LANG C.UTF-8
