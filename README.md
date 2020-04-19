@@ -2,6 +2,8 @@
 You can easily create Rails templates using docker-compose.
 It uses PostgreSQL or MySQL for the database and webpacker on the front end, so modern development using ES 6 is possible.
 
+If you want to use Rails 6.0 or later, please use [this branch] (https://github.com/belion-freee/quickstart/tree/rails6).
+
 詳細な手順は[Qiita](https://qiita.com/belion_freee/items/f0ef60a08299c9febbdf)にも載せてあります。
 
 ## Install Docker
