@@ -42,12 +42,12 @@ Enjoy your Rails!
 ## Do you wana use PostgreSQL?
 If you want to use PostgreSQL, please install it referring to the following branch.
 
-[PostgreSQL (master)] (https://github.com/belion-freee/quickstart)
+[PostgreSQL (master)](https://github.com/belion-freee/quickstart)
 
 ## Do you wana use Rails6?
 If you want to use Rails 6.0 or later, please install it referring to the following branch.
 
-[Rails 6.0] (https://github.com/belion-freee/quickstart/tree/rails6)
+[Rails 6.0](https://github.com/belion-freee/quickstart/tree/rails6)
 
 ## Do you use Windows?
 It has been reported that scripts do not work properly on Windows.
