@@ -47,7 +47,7 @@ create_project() {
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -d=mysql$*
+  bundle_exec rails new . -f -d=mysql $*
 
   echoing "Exec Bundle Update for alerts"
   bundle_cmd update
