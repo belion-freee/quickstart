@@ -44,6 +44,9 @@ create_project() {
   echoing "Update config/database.yml"
   mv database.yml config/database.yml
 
+  echoing "Exec db create"
+  bundle_exec rails db:create
+
   echoing "docker-compose up"
   compose_up $app
 
