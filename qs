@@ -34,50 +34,20 @@ rm_pids() {
 }
 
 create_project() {
-  echoing "Exec Bundle Install for executing rails new command"
-  # set options
-  test_option=" -T"
-  front_option=""
-  db_option="postgresql"
-  api_option=""
+  webpack=""
   for arg in $@
     do
       case $arg in
-        "minitest") test_option="" ;;
-        "webpack") front_option=" --webpack" ;;
-        "react") front_option=" --webpack=react" ;;
-        "vue") front_option=" --webpack=vue" ;;
-        "angular") front_option=" --webpack=angular" ;;
-        "mysql") db_option="mysql" ;;
-        "api") api_option=" --api" ;;
+        --webpack* ) webpack="true" ;;
         *) ;;
       esac
     done
-
-  echo "front option setting by$front_option"
-  echo "test option setting by$test_option"
-  echo "db option setting by $db_option"
-  echo "api option setting by $api_option"
-
-  d_row_num="12,19d"
-  dc_row_num="11,17d"
-  if [ "mysql" == "$db_option" ]; then
-    d_row_num="2,11d"
-    dc_row_num="4,10d"
-  fi
-
-  echo "d_row_num setting by $d_row_num"
-  echo "dc_row_num setting by $dc_row_num"
-
-  # edit yml files
-  sed -i '' -e $d_row_num database.yml
-  sed -i '' -e $dc_row_num docker-compose.yml
 
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new . -f -d=$db_option$front_option$test_option$api_option
+  bundle_exec rails new . -f -d=postgresql $*
 
   echoing "Exec Bundle Update for alerts"
   bundle_cmd update
@@ -88,9 +58,9 @@ create_project() {
   echoing "Exec db create"
   bundle_exec rails db:create
 
-  if [ " --webpack" == "$front_option" ]; then
+  if [ "true" == "$webpack" ]; then
     echoing "Exec webpacker:install"
-	bundle_exec rails webpacker:install
+    bundle_exec rails webpacker:install
   fi
 
   echoing "docker-compose up"

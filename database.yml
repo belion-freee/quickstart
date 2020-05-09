@@ -9,14 +9,6 @@ default: &default
   pool: 5
   timeout: 5000
   stats_execution_limit: 10
-  adapter: mysql2
-  encoding: utf8
-  host: db
-  port: 3306
-  username: root
-  password:
-  pool: 5
-  timeout: 5000
 
 development:
   <<: *default

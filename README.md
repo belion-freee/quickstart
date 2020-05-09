@@ -1,8 +1,6 @@
 # quickstart
 You can easily create Rails templates using docker-compose.
-It uses PostgreSQL or MySQL for the database and webpacker on the front end, so modern development using ES 6 is possible.
-
-If you want to use Rails 6.0 or later, please use [this branch] (https://github.com/belion-freee/quickstart/tree/rails6).
+It uses PostgreSQL for the database and webpacker on the front end, so modern development using ES 6 is possible.
 
 詳細な手順は[Qiita](https://qiita.com/belion_freee/items/f0ef60a08299c9febbdf)にも載せてあります。
 
@@ -31,22 +29,25 @@ Only you need to execute setup shell.
 ```
 
 ### Options
-There are options to create new rails project.
-
-- `minitest` : Setup with this option if you need Minitest.
-- `webpack` : Setup with this option if you need Webpacker.
-- `react` : Setup with this option if you need React.
-- `vue` : Setup with this option if you need Vue.
-- `angular` : Setup with this option if you need Angular.
-- `mysql` : Setup with this option if you need to setup db with MySQL.
+You can use the options available with `rails new` commands.
 
 ```
-./qs setup minitest webpack mysql
+./qs setup -T --webpack=react
 ```
 
 ## Hello World!!
 Finally, please access `http://localhost:3000` as Rails is running.
 Enjoy your Rails!
+
+## Do you wana use MySQL?
+If you want to use MySQL, please install it referring to the following branch.
+
+[MySQL](https://github.com/belion-freee/quickstart)
+
+## Do you wana use Rails6?
+If you want to use Rails 6.0 or later, please install it referring to the following branch.
+
+[Rails 6.0](https://github.com/belion-freee/quickstart/tree/rails6)
 
 ## Do you use Windows?
 It has been reported that scripts do not work properly on Windows.
@@ -73,7 +74,7 @@ Now, You can use solargraph server.
 Execute `./qs up redis` command.
 
 ### Chrome service
-Execute `./qs up chrome` command. 
+Execute `./qs up chrome` command.
 
 ## Development
 
