@@ -27,7 +27,6 @@ services:
       - bundle:/usr/local/bundle:cached
       - /app/.git
     environment:
-      HOME: /app
       RAILS_ENV: development
     ports:
       - "3000:3000"

@@ -4,10 +4,13 @@ FROM ruby:2.6.5
 # using japanese on rails console
 ENV LANG C.UTF-8
 
-# remove warn
+# remove debconf warning. debconf is a configuration system for Debian packages.
 ENV DEBCONF_NOWARNINGS yes
+
+# remove apt-key warning like 'Warning: apt-key output should not be parsed (stdout is not a terminal)'
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE yes
-ENV XDG_CACHE_HOME /tmp
+
+# make the rails server port public
 EXPOSE 3000
 
 # install package to docker container
@@ -18,18 +21,15 @@ RUN apt-get update -qq && apt-get install -y \
     less \
     graphviz
 
-# install yarn
-RUN apt-get install apt-transport-https
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -y yarn
-
-# setting work directory
+# make and setting work directory
 RUN mkdir /app
 WORKDIR /app
 
-# setting environment value
+# set home directory to work directory
 ENV HOME /app
 
-# executing bundle install
-COPY Gemfile /app/Gemfile
+# install yarn
+RUN apt-get install -y apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn
