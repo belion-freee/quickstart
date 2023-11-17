@@ -34,19 +34,10 @@ rm_pids() {
 }
 
 create_project() {
-  webpack=""
-  for arg in $@
-    do
-      case $arg in
-        --webpack* ) webpack="true" ;;
-        *) ;;
-      esac
-    done
-
   echoing "Exec Bundle Install for executing rails new command"
   bundle_cmd install
 
-  echoing "Exec rails new with postgresql and webpack"
+  echoing "Exec rails new with postgresql"
   bundle_exec rails new . -f -d=postgresql $*
 
   echoing "Exec Bundle Update for alerts"
@@ -57,11 +48,6 @@ create_project() {
 
   echoing "Exec db create"
   bundle_exec rails db:create
-
-  if [ "true" == "$webpack" ]; then
-    echoing "Exec webpacker:install"
-    bundle_exec rails webpacker:install
-  fi
 
   echoing "docker-compose up"
   compose_up $app
@@ -76,9 +62,7 @@ init_services() {
 
     bundle_cmd install
 
-    if [ "--webpack" == "$1" ]; then
-      run_yarn install
-    fi
+    run_yarn install
 
     rails_cmd db:migrate:reset
     rails_cmd db:seed
@@ -158,14 +142,6 @@ run_app() {
 
 run_db() {
     invoke_run $db $*
-}
-
-run_spring() {
-    $dc exec spring $*
-}
-
-run_solargraph() {
-    invoke_run solargraph $*
 }
 
 rails_server() {
@@ -257,14 +233,6 @@ rails_console() {
     bundle_exec rails c $*
 }
 
-spring_cmd() {
-    run_spring spring $*
-}
-
-solargraph_cmd() {
-    run_solargraph solargraph $*
-}
-
 rake_reset_db() {
     echoing "Running reset db"
     compose_stop $app
@@ -304,10 +272,6 @@ run_yarn() {
 
 run_npm() {
   run_app npm $*
-}
-
-run_webpack() {
-  run_app webpack $*
 }
 
 cmd=$1
@@ -391,21 +355,6 @@ case "$cmd" in
     npm)
         run_npm $*
         ;;
-    webpack)
-        run_webpack $*
-        ;;
-    spring)
-        spring_cmd $*
-        ;;
-    sdb)
-        spring_db $*
-        ;;
-    sdive)
-        spring_dive $*
-        ;;
-    solargraph)
-        solargraph_cmd $*
-        ;;
     *)
         read -d '' help <<-EOF
 Usage: $0 command
@@ -436,17 +385,6 @@ App:
   rubocop  [args] Run rubocop
   yarn      Run yarn command in application container
   npm       Run npm  command in application container
-  webpack   Run webpack  command in application container
-
-Spring
-  spring    Exec spring command in Spring container
-  sdive     Into spring container
-  sdb       [args] Run rails db command you can use set(migrate), up, down, reset, other is status
-             ex: ./qs db set #running rails db:migrate
-                 ./qs db up 2019010101 #running rails db:migrate:up VERSION=2019010101
-
-Solargraph
-  solargraph Run solargraph command in Spring container
 
 DB:
   reset-db  reset database in DB container

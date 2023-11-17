@@ -1,5 +1,5 @@
-# use ruby version 2.6.5
-FROM ruby:2.6.5
+# use ruby version 3.2
+FROM ruby:3.2
 
 # using japanese on rails console
 ENV LANG C.UTF-8
@@ -19,7 +19,8 @@ RUN apt-get update -qq && apt-get install -y \
     libpq-dev \
     vim \
     less \
-    graphviz
+    nodejs \
+    npm
 
 # make and setting work directory
 RUN mkdir /app

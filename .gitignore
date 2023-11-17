@@ -4,3 +4,10 @@
 .atom
 .vscode
 .viminfo
+.local
+.npm
+.node_repl_history
+.node-version
+.ruby-version
+tmp
+node_modules
